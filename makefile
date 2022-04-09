@@ -7,7 +7,7 @@ commit:
 	read comment; \
 	git commit -m"$$comment"
 sync: sub_pull commit 
-	git push -u origin master
+	git push -u origin main
 
 PHONY += commit sync
 # PHONY =========================================================================================
