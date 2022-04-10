@@ -1,3 +1,7 @@
+# build yosys ===================================================================================
+build: yosys
+	mkdir build
+	cd build && make -f ../yosys/Makefile ENABLE_DEBUG=1 -j16
 # GitHub ========================================================================================
 sub_pull:
 	git submodule foreach --recursive 'git pull'
