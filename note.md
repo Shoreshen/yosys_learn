@@ -1,6 +1,83 @@
 [TOC]
 
-# cells
+# rtlil objects (c++)
+
+Basic organization of rtlil objects:
+
+<img src="./pic/截图_2022-04-10_11-20-54.png">
+
+
+## RTLIL::IdString
+
+The identifier of a RTLIL object.
+
+## RTLIL::Design
+
+The container for `RTLIL::Module` (zero to many).
+
+It also keeps a list of selected objects (modules) in order passes can operate on determined modules.
+
+There always be a `RTLIL::Design *current_design;` pointing to the design that is being processed.
+
+## RTLIL::Module
+
+Contain objects as follow:
+
+1. Module name (`RTLIL::IdString`)
+2. Zero to many `RTLIL::Cell`,  `RTLIL::Wire`, `RTLIL::Process` and `RTLIL::Memory`
+3. A list of attributes
+4. A list of connections between wires
+5. An optional frontend callback used to derive parametrized variations of the module
+
+## RTLIL::Wire
+
+An RTLIL::Wire object has the following properties:
+1. The wire name
+2. A list of attributes
+3. A width (buses are just wires with a width > 1)
+4. Bus direction ([MSB to LSB](https://en.wikipedia.org/wiki/Bit_numbering) or vice versa)
+5. Lowest valid bit index (LSB or MSB depending on bus direction)
+6. If the wire is a port: port number and direction (input/output/inout)
+
+## RTLIL::Cell
+
+An RTLIL::Cell object has the following properties:
+1. The cell name and type
+2. A list of attributes
+3. A list of parameters (for parametric cells)
+4. Cell ports and the connections of ports to wires and constants
+   The connections of ports to wires are coded by assigning an `RTLIL::SigSpec` to each cell port
+
+## RTLIL::SigSpec
+
+A “signal” is everything that can be applied to a cell port (wire, constant, memory or concatenation/selection of them).
+
+## RTLIL::Process
+
+An RTLIL::Process is a container for:
+1. zero or more `RTLIL::SyncRule`
+2. exactly one `RTLIL::CaseRule`
+
+Note that `RTLIL::CaseRule` is a container for:
+1. Zero or more assignments (`RTLIL::SigSig`) 
+2. Zero or more `RTLIL::SwitchRule` objects. 
+
+And `RTLIL::SwitchRule` objects is a container for zero or more `RTLIL::CaseRule` objects, which makes case rule and switch rule recursively contain each other.
+
+## RTLIL::Memory
+
+A memory object has the following properties:
+1. The memory name
+2. A list of attributes
+3. The width of an addressable word
+4. The size of the memory in number of words
+
+Several cells are used to manipulate `RTLIL::Memory`:
+1. All read accesses to the memory are transformed to $memrd cells
+2. all write accesses to the memory are transformed to $memwr cells
+3. Memory initialization is transformed to $meminit cells
+
+# Internal cells
 
 ## multiplexer
 
