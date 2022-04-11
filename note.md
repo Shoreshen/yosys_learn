@@ -1,5 +1,11 @@
 [TOC]
 
+# Debug
+
+## main
+
+Located in `yosys/kernel/driver.cc:197`
+
 # rtlil objects (c++)
 
 Basic organization of rtlil objects:
