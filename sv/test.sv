@@ -13,7 +13,8 @@
 //     end
 // endmodule
 
-// Sample from article of "Title on flip-flop inference in HDL synthesis"
+// This case will create 2 `$dff`s, but actually `Y` is inverse of `st`
+// thus in fact one `$dff` is enough
 module top (
     input r,
     input clk,
