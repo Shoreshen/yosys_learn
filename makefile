@@ -1,6 +1,6 @@
 # yosys =========================================================================================
 build: ./yosys
-	mkdir build
+	-mkdir build
 	cd build && make -f ../yosys/Makefile ENABLE_DEBUG=1 -j16
 run:build
 	./build/yosys ./sv/test.ys
