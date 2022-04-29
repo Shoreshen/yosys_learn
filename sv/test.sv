@@ -1,11 +1,14 @@
 // module top;
-//     bit [0:1]a;
-//     bit [0:1]b;
-//     bit clk;
-//     bit c;
-//     always @(posedge clk) begin
-//         if (b == 2) begin
+//     input bit a;
+//     input bit b;
+//     input bit clk;
+//     output bit c;
+//     always @(posedge clk, posedge a) begin
+//         // c = 0;
+//         if (a) begin
 //             c = 0;
+//         end else begin
+//             c = b;
 //         end
 //     end
 // endmodule
@@ -36,20 +39,16 @@
 //     end
 // endmodule
 
-// module top (
-//     input A,
-//     input B,
-//     input c,
-//     input R1,
-//     input R2,
-//     output Q
-// );
-//     always @(posedge R1 or posedge R2 or posedge c) begin
-//         Q = A + B;
-//         if(R2) begin
-//             Q = 0;
-//         end else if(R1) begin
-//             Q = 0;
-//         end
-//     end
-// endmodule
+module top (
+    input A,
+    input B,
+    input clk,
+    output Q
+);
+    always @(posedge clk or posedge A) begin
+        Q = B;
+        if(A) begin
+            Q = 0;
+        end
+    end
+endmodule
