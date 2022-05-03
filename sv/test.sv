@@ -42,13 +42,59 @@
 module top (
     input A,
     input B,
+    input C,
+    input [1:0]D,
     input clk,
-    output Q
+    output [1:0]Q,
+    output P
 );
-    always @(posedge clk or posedge A) begin
-        Q = B;
+    always @(posedge clk or posedge A or posedge C or posedge B) begin
         if(A) begin
+            Q = 2;
+        end else if (B) begin
+            Q = 1;
+        end else if (C) begin
             Q = 0;
+        end else begin
+            Q = D;
         end
     end
 endmodule
+
+// module top (
+//     input A,
+//     input B,
+//     input C,
+//     input D,
+//     input clk,
+//     output Q,
+//     output P
+// );
+//     always @(posedge A) begin
+//         if(A) begin
+//             Q = D;
+//         end else begin
+//             Q = D;
+//         end
+//     end
+// endmodule
+
+// module top (
+//     input A,
+//     input B,
+//     input C,
+//     input D,
+//     input clk,
+//     output Q,
+//     output P
+// );
+//     always @(posedge clk or posedge A or posedge B) begin
+//         if(A) begin
+//             Q = 0;
+//         end else if (B) begin
+//             Q = 1;
+//         end else begin
+//             Q = D;
+//         end
+//     end
+// endmodule

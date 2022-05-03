@@ -1,10 +1,10 @@
 # yosys =========================================================================================
-build: ./yosys
+build:
 	-mkdir build
 	cd build && make -f ../yosys/Makefile ENABLE_DEBUG=1 -j16
-run:build
+run:
 	./build/yosys ./sv/test.ys
-
+PHONY += build run
 # Clean =========================================================================================
 clean:
 	-rm ./sv/*.json ./sv/*.rtlil

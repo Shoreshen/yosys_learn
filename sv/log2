@@ -1,0 +1,630 @@
+./build/yosys ./sv/test.ys
+
+ /----------------------------------------------------------------------------\
+ |                                                                            |
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |                                                                            |
+ |  Copyright (C) 2012 - 2020  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |                                                                            |
+ |  Permission to use, copy, modify, and/or distribute this software for any  |
+ |  purpose with or without fee is hereby granted, provided that the above    |
+ |  copyright notice and this permission notice appear in all copies.         |
+ |                                                                            |
+ |  THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES  |
+ |  WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF          |
+ |  MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR   |
+ |  ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES    |
+ |  WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN     |
+ |  ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF   |
+ |  OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.            |
+ |                                                                            |
+ \----------------------------------------------------------------------------/
+
+ Yosys 0.16+58 (git sha1 b30d90a14, clang 13.0.1 -O0 -fPIC)
+
+
+-- Executing script file `./sv/test.ys' --
+
+1. Executing Verilog-2005 frontend: /home/shore/OneDrive/yosys/sv/test.sv
+Parsing SystemVerilog input from `/home/shore/OneDrive/yosys/sv/test.sv' to AST representation.
+Storing AST representation for module `$abstract\top'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+3. Executing AST frontend in derive mode using pre-parsed AST for module `\top'.
+Generating RTLIL representation for module `\top'.
+Warning: wire '\Q' is assigned in a block at /home/shore/OneDrive/yosys/sv/test.sv:53.13-53.18.
+Warning: wire '\Q' is assigned in a block at /home/shore/OneDrive/yosys/sv/test.sv:55.13-55.18.
+Warning: wire '\Q' is assigned in a block at /home/shore/OneDrive/yosys/sv/test.sv:57.13-57.18.
+
+3.1. Analyzing design hierarchy..
+Top module:  \top
+
+3.2. Analyzing design hierarchy..
+Top module:  \top
+Removing unused module `$abstract\top'.
+Removed 1 unused modules.
+
+4. Executing RTLIL backend.
+Output filename: /home/shore/OneDrive/yosys/sv/test.rtlil
+
+5. Executing PROC pass (convert processes to netlists).
+
+5.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+autoidx 2
+attribute \hdlname "\\top"
+attribute \top 1
+attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:42.1-60.10"
+module \top
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $0\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $1\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $2\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:43.11-43.12"
+  wire input 1 \A
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:44.11-44.12"
+  wire input 2 \B
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:45.11-45.12"
+  wire input 3 \C
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:46.11-46.12"
+  wire input 4 \D
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:49.12-49.13"
+  wire output 7 \P
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:48.12-48.13"
+  wire output 6 \Q
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:47.11-47.14"
+  wire input 5 \clk
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  process $proc$/home/shore/OneDrive/yosys/sv/test.sv:51$1
+    assign $0\Q[0:0] $1\Q[0:0]
+    attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:52.9-58.12"
+    switch \A
+      attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:52.12-52.13"
+      case 1'1
+        assign $1\Q[0:0] \Q
+      attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:54.13-54.17"
+      case 
+        assign $1\Q[0:0] $2\Q[0:0]
+        attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:54.18-58.12"
+        switch \C
+          attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:54.22-54.23"
+          case 1'1
+            assign $2\Q[0:0] \Q
+          attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:56.13-56.17"
+          case 
+            assign $2\Q[0:0] \D
+        end
+    end
+    sync posedge \clk
+      update \Q $0\Q[0:0]
+    sync posedge \A
+      update \Q $0\Q[0:0]
+    sync posedge \C
+      update \Q $0\Q[0:0]
+  end
+end
+
+5.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 2 switch rules as full_case in process $proc$/home/shore/OneDrive/yosys/sv/test.sv:51$1 in module top.
+Removed a total of 0 dead cases.
+autoidx 2
+attribute \hdlname "\\top"
+attribute \top 1
+attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:42.1-60.10"
+module \top
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $0\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $1\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $2\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:43.11-43.12"
+  wire input 1 \A
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:44.11-44.12"
+  wire input 2 \B
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:45.11-45.12"
+  wire input 3 \C
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:46.11-46.12"
+  wire input 4 \D
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:49.12-49.13"
+  wire output 7 \P
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:48.12-48.13"
+  wire output 6 \Q
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:47.11-47.14"
+  wire input 5 \clk
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  process $proc$/home/shore/OneDrive/yosys/sv/test.sv:51$1
+    assign $0\Q[0:0] $1\Q[0:0]
+    attribute \full_case 1
+    attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:52.9-58.12"
+    switch \A
+      attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:52.12-52.13"
+      case 1'1
+        assign $1\Q[0:0] \Q
+      attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:54.13-54.17"
+      case 
+        assign $1\Q[0:0] $2\Q[0:0]
+        attribute \full_case 1
+        attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:54.18-58.12"
+        switch \C
+          attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:54.22-54.23"
+          case 1'1
+            assign $2\Q[0:0] \Q
+          attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:56.13-56.17"
+          case 
+            assign $2\Q[0:0] \D
+        end
+    end
+    sync posedge \clk
+      update \Q $0\Q[0:0]
+    sync posedge \A
+      update \Q $0\Q[0:0]
+    sync posedge \C
+      update \Q $0\Q[0:0]
+  end
+end
+
+5.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 1 assignment to connection.
+autoidx 2
+attribute \hdlname "\\top"
+attribute \top 1
+attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:42.1-60.10"
+module \top
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $0\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $1\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $2\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:43.11-43.12"
+  wire input 1 \A
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:44.11-44.12"
+  wire input 2 \B
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:45.11-45.12"
+  wire input 3 \C
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:46.11-46.12"
+  wire input 4 \D
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:49.12-49.13"
+  wire output 7 \P
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:48.12-48.13"
+  wire output 6 \Q
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:47.11-47.14"
+  wire input 5 \clk
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  process $proc$/home/shore/OneDrive/yosys/sv/test.sv:51$1
+    attribute \full_case 1
+    attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:52.9-58.12"
+    switch \A
+      attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:52.12-52.13"
+      case 1'1
+        assign $1\Q[0:0] \Q
+      attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:54.13-54.17"
+      case 
+        assign $1\Q[0:0] $2\Q[0:0]
+        attribute \full_case 1
+        attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:54.18-58.12"
+        switch \C
+          attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:54.22-54.23"
+          case 1'1
+            assign $2\Q[0:0] \Q
+          attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:56.13-56.17"
+          case 
+            assign $2\Q[0:0] \D
+        end
+    end
+    sync posedge \clk
+      update \Q $0\Q[0:0]
+    sync posedge \A
+      update \Q $0\Q[0:0]
+    sync posedge \C
+      update \Q $0\Q[0:0]
+  end
+  connect $0\Q[0:0] $1\Q[0:0]
+end
+
+5.4. Executing PROC_INIT pass (extract init attributes).
+autoidx 2
+attribute \hdlname "\\top"
+attribute \top 1
+attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:42.1-60.10"
+module \top
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $0\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $1\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $2\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:43.11-43.12"
+  wire input 1 \A
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:44.11-44.12"
+  wire input 2 \B
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:45.11-45.12"
+  wire input 3 \C
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:46.11-46.12"
+  wire input 4 \D
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:49.12-49.13"
+  wire output 7 \P
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:48.12-48.13"
+  wire output 6 \Q
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:47.11-47.14"
+  wire input 5 \clk
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  process $proc$/home/shore/OneDrive/yosys/sv/test.sv:51$1
+    attribute \full_case 1
+    attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:52.9-58.12"
+    switch \A
+      attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:52.12-52.13"
+      case 1'1
+        assign $1\Q[0:0] \Q
+      attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:54.13-54.17"
+      case 
+        assign $1\Q[0:0] $2\Q[0:0]
+        attribute \full_case 1
+        attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:54.18-58.12"
+        switch \C
+          attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:54.22-54.23"
+          case 1'1
+            assign $2\Q[0:0] \Q
+          attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:56.13-56.17"
+          case 
+            assign $2\Q[0:0] \D
+        end
+    end
+    sync posedge \clk
+      update \Q $0\Q[0:0]
+    sync posedge \A
+      update \Q $0\Q[0:0]
+    sync posedge \C
+      update \Q $0\Q[0:0]
+  end
+  connect $0\Q[0:0] $1\Q[0:0]
+end
+
+5.5. Executing PROC_ARST pass (detect async resets in processes).
+Found async reset \A in `\top.$proc$/home/shore/OneDrive/yosys/sv/test.sv:51$1'.
+Found async reset \C in `\top.$proc$/home/shore/OneDrive/yosys/sv/test.sv:51$1'.
+autoidx 2
+attribute \hdlname "\\top"
+attribute \top 1
+attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:42.1-60.10"
+module \top
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $0\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $1\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $2\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:43.11-43.12"
+  wire input 1 \A
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:44.11-44.12"
+  wire input 2 \B
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:45.11-45.12"
+  wire input 3 \C
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:46.11-46.12"
+  wire input 4 \D
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:49.12-49.13"
+  wire output 7 \P
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:48.12-48.13"
+  wire output 6 \Q
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:47.11-47.14"
+  wire input 5 \clk
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  process $proc$/home/shore/OneDrive/yosys/sv/test.sv:51$1
+    assign $1\Q[0:0] $2\Q[0:0]
+    assign $2\Q[0:0] \D
+    sync high \A
+      update \Q \Q
+    sync high \C
+      update \Q \Q
+    sync posedge \clk
+      update \Q $0\Q[0:0]
+  end
+  connect $0\Q[0:0] $1\Q[0:0]
+end
+
+5.6. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\top.$proc$/home/shore/OneDrive/yosys/sv/test.sv:51$1'.
+     1/2: $2\Q[0:0]
+     2/2: $1\Q[0:0]
+autoidx 2
+attribute \hdlname "\\top"
+attribute \top 1
+attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:42.1-60.10"
+module \top
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $0\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $1\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $2\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:43.11-43.12"
+  wire input 1 \A
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:44.11-44.12"
+  wire input 2 \B
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:45.11-45.12"
+  wire input 3 \C
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:46.11-46.12"
+  wire input 4 \D
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:49.12-49.13"
+  wire output 7 \P
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:48.12-48.13"
+  wire output 6 \Q
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:47.11-47.14"
+  wire input 5 \clk
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  process $proc$/home/shore/OneDrive/yosys/sv/test.sv:51$1
+    assign { } { }
+    assign { } { }
+    sync high \A
+      update \Q \Q
+    sync high \C
+      update \Q \Q
+    sync posedge \clk
+      update \Q $0\Q[0:0]
+  end
+  connect $0\Q[0:0] $1\Q[0:0]
+  connect $2\Q[0:0] \D
+  connect $1\Q[0:0] $2\Q[0:0]
+end
+
+5.7. Executing PROC_DLATCH pass (convert process syncs to latches).
+autoidx 2
+attribute \hdlname "\\top"
+attribute \top 1
+attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:42.1-60.10"
+module \top
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $0\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $1\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $2\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:43.11-43.12"
+  wire input 1 \A
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:44.11-44.12"
+  wire input 2 \B
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:45.11-45.12"
+  wire input 3 \C
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:46.11-46.12"
+  wire input 4 \D
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:49.12-49.13"
+  wire output 7 \P
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:48.12-48.13"
+  wire output 6 \Q
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:47.11-47.14"
+  wire input 5 \clk
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  process $proc$/home/shore/OneDrive/yosys/sv/test.sv:51$1
+    assign { } { }
+    assign { } { }
+    sync high \A
+      update \Q \Q
+    sync high \C
+      update \Q \Q
+    sync posedge \clk
+      update \Q $0\Q[0:0]
+  end
+  connect $0\Q[0:0] $1\Q[0:0]
+  connect $2\Q[0:0] \D
+  connect $1\Q[0:0] $2\Q[0:0]
+end
+
+5.8. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\top.\Q' using process `\top.$proc$/home/shore/OneDrive/yosys/sv/test.sv:51$1'.
+  created $dff cell `$procdff$6' with positive edge clock.
+autoidx 7
+attribute \hdlname "\\top"
+attribute \top 1
+attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:42.1-60.10"
+module \top
+  wire $auto$rtlil.cc:2464:Mux$5
+  wire $auto$proc_dff.cc:270:proc_dff$2
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $0\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $1\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $2\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:43.11-43.12"
+  wire input 1 \A
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:44.11-44.12"
+  wire input 2 \B
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:45.11-45.12"
+  wire input 3 \C
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:46.11-46.12"
+  wire input 4 \D
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:49.12-49.13"
+  wire output 7 \P
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:48.12-48.13"
+  wire output 6 \Q
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:47.11-47.14"
+  wire input 5 \clk
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  cell $dff $procdff$6
+    parameter \CLK_POLARITY 1'1
+    parameter \WIDTH 1
+    connect \CLK \clk
+    connect \Q \Q
+    connect \D $auto$rtlil.cc:2464:Mux$5
+  end
+  cell $mux $auto$proc_dff.cc:307:proc_dff$4
+    parameter \WIDTH 1
+    connect \Y $auto$rtlil.cc:2464:Mux$5
+    connect \S $auto$proc_dff.cc:270:proc_dff$2
+    connect \B \Q
+    connect \A \D
+  end
+  cell $ne $auto$proc_dff.cc:281:proc_dff$3
+    parameter \Y_WIDTH 1
+    parameter \B_WIDTH 2
+    parameter \A_WIDTH 2
+    parameter \B_SIGNED 1'0
+    parameter \A_SIGNED 1'0
+    connect \Y $auto$proc_dff.cc:270:proc_dff$2
+    connect \B 2'00
+    connect \A { \A \C }
+  end
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  process $proc$/home/shore/OneDrive/yosys/sv/test.sv:51$1
+    assign { } { }
+    assign { } { }
+    sync high \A
+      update { } { }
+    sync high \C
+      update { } { }
+    sync posedge \clk
+      update { } { }
+  end
+  connect $0\Q[0:0] $1\Q[0:0]
+  connect $2\Q[0:0] \D
+  connect $1\Q[0:0] $2\Q[0:0]
+end
+
+5.9. Executing PROC_MEMWR pass (convert process memory writes to cells).
+autoidx 7
+attribute \hdlname "\\top"
+attribute \top 1
+attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:42.1-60.10"
+module \top
+  wire $auto$rtlil.cc:2464:Mux$5
+  wire $auto$proc_dff.cc:270:proc_dff$2
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $0\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $1\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $2\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:43.11-43.12"
+  wire input 1 \A
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:44.11-44.12"
+  wire input 2 \B
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:45.11-45.12"
+  wire input 3 \C
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:46.11-46.12"
+  wire input 4 \D
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:49.12-49.13"
+  wire output 7 \P
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:48.12-48.13"
+  wire output 6 \Q
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:47.11-47.14"
+  wire input 5 \clk
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  cell $dff $procdff$6
+    parameter \CLK_POLARITY 1'1
+    parameter \WIDTH 1
+    connect \CLK \clk
+    connect \Q \Q
+    connect \D $auto$rtlil.cc:2464:Mux$5
+  end
+  cell $mux $auto$proc_dff.cc:307:proc_dff$4
+    parameter \WIDTH 1
+    connect \Y $auto$rtlil.cc:2464:Mux$5
+    connect \S $auto$proc_dff.cc:270:proc_dff$2
+    connect \B \Q
+    connect \A \D
+  end
+  cell $ne $auto$proc_dff.cc:281:proc_dff$3
+    parameter \Y_WIDTH 1
+    parameter \B_WIDTH 2
+    parameter \A_WIDTH 2
+    parameter \B_SIGNED 1'0
+    parameter \A_SIGNED 1'0
+    connect \Y $auto$proc_dff.cc:270:proc_dff$2
+    connect \B 2'00
+    connect \A { \A \C }
+  end
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  process $proc$/home/shore/OneDrive/yosys/sv/test.sv:51$1
+    assign { } { }
+    assign { } { }
+    sync high \A
+      update { } { }
+    sync high \C
+      update { } { }
+    sync posedge \clk
+      update { } { }
+  end
+  connect $0\Q[0:0] $1\Q[0:0]
+  connect $2\Q[0:0] \D
+  connect $1\Q[0:0] $2\Q[0:0]
+end
+
+5.10. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `top.$proc$/home/shore/OneDrive/yosys/sv/test.sv:51$1'.
+Cleaned up 0 empty switches.
+autoidx 7
+attribute \hdlname "\\top"
+attribute \top 1
+attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:42.1-60.10"
+module \top
+  wire $auto$rtlil.cc:2464:Mux$5
+  wire $auto$proc_dff.cc:270:proc_dff$2
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $0\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $1\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  wire $2\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:43.11-43.12"
+  wire input 1 \A
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:44.11-44.12"
+  wire input 2 \B
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:45.11-45.12"
+  wire input 3 \C
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:46.11-46.12"
+  wire input 4 \D
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:49.12-49.13"
+  wire output 7 \P
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:48.12-48.13"
+  wire output 6 \Q
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:47.11-47.14"
+  wire input 5 \clk
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:51.5-59.8"
+  cell $dff $procdff$6
+    parameter \CLK_POLARITY 1'1
+    parameter \WIDTH 1
+    connect \CLK \clk
+    connect \Q \Q
+    connect \D $auto$rtlil.cc:2464:Mux$5
+  end
+  cell $mux $auto$proc_dff.cc:307:proc_dff$4
+    parameter \WIDTH 1
+    connect \Y $auto$rtlil.cc:2464:Mux$5
+    connect \S $auto$proc_dff.cc:270:proc_dff$2
+    connect \B \Q
+    connect \A \D
+  end
+  cell $ne $auto$proc_dff.cc:281:proc_dff$3
+    parameter \Y_WIDTH 1
+    parameter \B_WIDTH 2
+    parameter \A_WIDTH 2
+    parameter \B_SIGNED 1'0
+    parameter \A_SIGNED 1'0
+    connect \Y $auto$proc_dff.cc:270:proc_dff$2
+    connect \B 2'00
+    connect \A { \A \C }
+  end
+  connect $0\Q[0:0] $1\Q[0:0]
+  connect $2\Q[0:0] \D
+  connect $1\Q[0:0] $2\Q[0:0]
+end
+
+5.11. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+<suppressed ~1 debug messages>
+
+6. Executing RTLIL backend.
+Output filename: /home/shore/OneDrive/yosys/sv/test.proc.rtlil
+
+7. Executing JSON backend.
+
+Warnings: 3 unique messages, 3 total
+End of script. Logfile hash: 89781b6748, CPU: user 0.02s system 0.00s, MEM: 18.24 MB peak
+Yosys 0.16+58 (git sha1 b30d90a14, clang 13.0.1 -O0 -fPIC)
+Time spent: 35% 1x opt_expr (0 sec), 15% 1x hierarchy (0 sec), ...

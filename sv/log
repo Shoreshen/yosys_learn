@@ -1,0 +1,85 @@
+module \top
+  wire $auto$proc_dff.cc:124:gen_dffsr_complex$13
+  wire $auto$proc_dff.cc:117:gen_dffsr_complex$11
+  wire $auto$proc_dff.cc:110:gen_dffsr_complex$9
+  wire $auto$proc_dff.cc:124:gen_dffsr_complex$7
+  wire $auto$proc_dff.cc:117:gen_dffsr_complex$5
+  wire $auto$proc_dff.cc:110:gen_dffsr_complex$3
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:91.5-99.8"
+  wire $2\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:91.5-99.8"
+  wire $1\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:91.5-99.8"
+  wire $0\Q[0:0]
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:89.12-89.13"
+  wire output 7 \P
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:88.12-88.13"
+  wire output 6 \Q
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:87.11-87.14"
+  wire input 5 \clk
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:86.11-86.12"
+  wire input 4 \D
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:85.11-85.12"
+  wire input 3 \C
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:84.11-84.12"
+  wire input 2 \B
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:83.11-83.12"
+  wire input 1 \A
+  attribute \src "/home/shore/OneDrive/yosys/sv/test.sv:91.5-99.8"
+  cell $dffsr $procdff$14
+    parameter \CLR_POLARITY 1'1
+    parameter \SET_POLARITY 1'1
+    parameter \CLK_POLARITY 1'1
+    parameter \WIDTH 1
+    connect \CLR $auto$proc_dff.cc:124:gen_dffsr_complex$13
+    connect \SET $auto$proc_dff.cc:117:gen_dffsr_complex$11
+    connect \CLK \clk
+    connect \Q \Q
+    connect \D \D
+  end
+  cell $mux $auto$proc_dff.cc:119:gen_dffsr_complex$12
+    parameter \WIDTH 1
+    connect \Y $auto$proc_dff.cc:124:gen_dffsr_complex$13
+    connect \S \A
+    connect \B $auto$proc_dff.cc:110:gen_dffsr_complex$9
+    connect \A $auto$proc_dff.cc:124:gen_dffsr_complex$7
+  end
+  cell $mux $auto$proc_dff.cc:112:gen_dffsr_complex$10
+    parameter \WIDTH 1
+    connect \Y $auto$proc_dff.cc:117:gen_dffsr_complex$11
+    connect \S \A
+    connect \B 1'0
+    connect \A $auto$proc_dff.cc:117:gen_dffsr_complex$5
+  end
+  cell $not $auto$proc_dff.cc:105:gen_dffsr_complex$8
+    parameter \Y_WIDTH 1
+    parameter \A_WIDTH 1
+    parameter \A_SIGNED 0
+    connect \Y $auto$proc_dff.cc:110:gen_dffsr_complex$9
+    connect \A 1'0
+  end
+  cell $mux $auto$proc_dff.cc:119:gen_dffsr_complex$6
+    parameter \WIDTH 1
+    connect \Y $auto$proc_dff.cc:124:gen_dffsr_complex$7
+    connect \S \B
+    connect \B $auto$proc_dff.cc:110:gen_dffsr_complex$3
+    connect \A 1'0
+  end
+  cell $mux $auto$proc_dff.cc:112:gen_dffsr_complex$4
+    parameter \WIDTH 1
+    connect \Y $auto$proc_dff.cc:117:gen_dffsr_complex$5
+    connect \S \B
+    connect \B 1'1
+    connect \A 1'0
+  end
+  cell $not $auto$proc_dff.cc:105:gen_dffsr_complex$2
+    parameter \Y_WIDTH 1
+    parameter \A_WIDTH 1
+    parameter \A_SIGNED 0
+    connect \Y $auto$proc_dff.cc:110:gen_dffsr_complex$3
+    connect \A 1'1
+  end
+  connect $0\Q[0:0] $1\Q[0:0]
+  connect $2\Q[0:0] \D
+  connect $1\Q[0:0] $2\Q[0:0]
+end
