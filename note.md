@@ -59,12 +59,21 @@ In the graph:
 4. If the first loop, then `clr_in = 0` and `set_in = 0`	
 
 After the loop, we have a bunch of cells that:
-1. If one of the `value`s related signal all deactivated, it will pass the previous result as output
-2. If non of the `value`s related signals is activated, then the first `clr_in` and `set_in` will be the output, which is both 0
-3. If one of the `value`s has a related signal activated:
+1. If one of the `value`s sensitive signal all deactivated, it will pass the previous result as output
+2. If non of the `value`s sensitive signals is activated, then the first `clr_in` and `set_in` will be the output, which is both 0
+3. If one of the `value`s has a sensitive signal activated:
    1. The output of that part `clr_in = ~value` and `set_in = value`
    2. It passes the meaning of clear the `i`'th bits that `value[i] == 0` and set the `i`'th bits that `value[i] == 1`
-   3. It will overwrite the previous `clr_in` and `set_in` 
+   3. It will overwrite the previous `clr_in` and `set_in`
+4. The final output of this step defined as `clr_out` and `set_out`
+
+#### Step 2
+
+Creating a `$affsr` with:
+1. `clk`: edge triggered clock signal
+2. `d`: signal output when non of the `value`s' sensitive signal is activated
+3. `set`: the `clr_out` of last step
+4. `clr`: the `set_out` of last step
 
 # rtlil objects (c++)
 
