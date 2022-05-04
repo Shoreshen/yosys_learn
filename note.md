@@ -36,16 +36,22 @@ The main function is `void proc_dff(RTLIL::Module *mod, RTLIL::Process *proc, Co
    | `RTLIL::SyncRule *sync_level`  | 1. Save level `RTLIL::SyncRule`<br>2. if there are many of them, save in `many_async_rules`<br>3. In this pass, level sync rule only resulted from asynchronous CLR or SET signal |
    | `RTLIL::SigSpec rstval`        | 1. Save the value give to `sig` of level `RTLIL::SyncRule`<br>2. if there are many of them, save in `many_async_rules`                                                            |
    | `RTLIL::SyncRule *sync_edge`   | 1. Save edge `RTLIL::SyncRule`<br>2. Only one edge rule, otherwise error                                                                                                          |
-   | `RTLIL::SyncRule *sync_always` | 1. Save always `RTLIL::SyncRule`<br>2. Has to be the only sync rule, otherwise error|
+   | `RTLIL::SyncRule *sync_always` | 1. Save always `RTLIL::SyncRule`<br>2. Has to be the only sync rule, otherwise error                                                                                              |
    | `RTLIL::SigSpec insig`         | 1. Sync type is edge, always or global clock, it is the signal giving value to `sig`<br>2. Only one `insig`, otherwise error                                                      |
 3. If many level `RTLIL::SyncRule` found:
-   1. If only one `rstval` corresponding to many level `RTLIL::SyncRule`, creating `$ne`, using it as CLR or SET of dff, thus any edge of the sync signal will cause edge of `$ne` and trigger dff. After that, clear `many_async_rules`
+   1. If multiple `RTLIL::SyncRule` will sync the same `rstval`, creating `$ne`, using it as CLR or SET of dff, thus any edge of the sync signal will cause edge of `$ne` and trigger dff. After that, clear `many_async_rules`
    2. Otherwise, insert `rstval` and `sync_level` into `many_async_rules` and clear them
 4. If `rstval == sig` then `sig` is valuing itself when CLR or SET, create `$mux` select on sensitive signal of `sync_level` and output `sig` or `insig`, plus an `$dff` will do the job.
 5. If `sync_always != NULL` then test if `sync_level == NULL` and `sync_edge == NULL`. If yes, then create connect cell, otherwise error
 6. If `many_async_rules.size() > 0`, call [`gen_dffsr_complex`](#gen_dffsr_complex)
+7. Else if `rstval` is a signal (variable) that cannot be evaluated, generate `$aldff` with `AD` as `rstval`
+8. Else If `sync_edge` empty, generate `$ff`, 
+9. else if `sync_level` empty, generate `$dff`
+10. Else generate `$adff`
 
 ### gen_dffsr_complex
+
+This function generates the multiple if else statements logic with a `$dffsr` register.
 
 #### Step 1
 
@@ -80,7 +86,6 @@ Creating a `$affsr` with:
 Basic organization of rtlil objects:
 
 <img src="./pic/截图_2022-04-10_11-20-54.png">
-
 
 ## RTLIL::IdString
 
@@ -139,6 +144,10 @@ private:
 	std::vector<RTLIL::SigBit> bits_; // LSB at index 0
 	...
 	inline int size() const { return width_; }
+	inline bool empty() const { return width_ == 0; }
+	...
+	void pack() const;
+	void unpack() const;
 	...
 }
 ```
@@ -147,7 +156,8 @@ While:
 1. `width_`: width of signal, it equals to the sum of width of `chunks_` or `bits_.size()`
 2. `std::vector<RTLIL::SigChunk> chunks_`: selecting "width" of signal start at "offset", or "width" of wired constant
 3. `std::vector<RTLIL::SigBit> bits_`: selecting 1 bit of signal start at "offset", or 1 bit of wired constant
-
+4. `void pack()`: move all signals from `bits_` to `chunks_`
+5. `void unpack()`: move all signals from `chunks_` to `bits_`
 
 ## RTLIL::Process
 
