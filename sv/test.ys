@@ -1,6 +1,7 @@
-read -sv /home/shore/OneDrive/yosys/sv/test.sv
+read -sv /home/shore/OneDrive/yosys_learn/sv/test.sv
 hierarchy -top top
-write_rtlil /home/shore/OneDrive/yosys/sv/test.rtlil
+write_rtlil /home/shore/OneDrive/yosys_learn/sv/test.rtlil
 proc
-write_rtlil /home/shore/OneDrive/yosys/sv/test.proc.rtlil
-write_json /home/shore/OneDrive/yosys/sv/test.json
+write_rtlil /home/shore/OneDrive/yosys_learn/sv/test.proc.rtlil
+opt
+write_rtlil /home/shore/OneDrive/yosys_learn/sv/test.opt.rtlil
