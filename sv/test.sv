@@ -1,23 +1,24 @@
 module top (
-    input wire d1,
-    input wire d2,
-    input wire cr1,
-    input wire cr2,
-    output wire tmp,
-    output wire tt
+    input wire clk,
+    input [3:0] data,
+    output [3:0] dout
 );
-
-    always @(*) begin
-        if (cr1)
-            tmp = wr1;
-        else if (cr2)
-            tmp = wr1;
-        else
-            tmp = wr2;
+    bit breaksig;
+    always @(posedge clk) begin
+        breaksig = 0;
+        for (integer i = 0; i < 4; i = i + 1) begin
+            if (breaksig == 0) begin
+                if (i > 1) begin
+                end else begin
+                    dout[i] <= data[i];
+                end
+            end
+            if (i > 1) begin
+                breaksig = 1;
+            end
+        end
     end
-
-    assign tt = wr1 & wr2;
-
+    
 endmodule
 
 // module top (

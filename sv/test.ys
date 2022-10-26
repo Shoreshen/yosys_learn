@@ -1,7 +1,8 @@
 read -sv /home/shore/OneDrive/yosys_learn/sv/test.sv
 hierarchy -top top
-write_rtlil /home/shore/OneDrive/yosys_learn/sv/test.rtlil
-proc
-write_rtlil /home/shore/OneDrive/yosys_learn/sv/test.proc.rtlil
-opt
-write_rtlil /home/shore/OneDrive/yosys_learn/sv/test.opt.rtlil
+proc_clean
+write_rtlil /home/shore/OneDrive/yosys_learn/sv/test_clean.rtlil
+proc_rmdead
+write_rtlil /home/shore/OneDrive/yosys_learn/sv/test_rmdead.rtlil
+proc_prune
+write_rtlil /home/shore/OneDrive/yosys_learn/sv/test_prune.rtlil
